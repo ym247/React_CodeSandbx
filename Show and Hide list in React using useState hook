@@ -1,0 +1,27 @@
+import React, { useState } from "react";
+
+const Show = () => {
+  const [shows, setShows] = useState(false);
+  const visibilityHandler = () => {
+    setShows(() => !shows);
+  };
+  return (
+    <div>
+      <h1 onMouseOver={visibilityHandler}>Trees list</h1>
+      {shows ? (
+        <ul>
+          <li>
+            <p>palm</p>
+          </li>
+          <li>
+            <p>neem</p>
+          </li>
+          <li>
+            <p>teek wood</p>
+          </li>
+        </ul>
+      ) : null}
+    </div>
+  );
+};
+export default Show;
