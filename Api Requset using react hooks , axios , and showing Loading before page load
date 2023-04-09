@@ -1,0 +1,43 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
+const Show = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const myApiRequest = async () => {
+    try {
+      const response = await axios.get(
+        `https://api.instantwebtools.net/v1/passenger?page=0&size=10`
+      );
+      setData(response.data.data);
+      setLoading(false);
+    } catch (error) {
+      alert(`Request Error`);
+    }
+  };
+
+  useEffect(() => {
+    myApiRequest();
+  }, []);
+  console.log(data);
+
+  return (
+    <div>
+      Api Integration
+      {loading ? (
+        <h2 loading={loading}>Loading....</h2>
+      ) : (
+        data.map((elem) => {
+          return (
+            <div key={elem.id}>
+              <p>{elem.name}</p>
+              <p>{elem.trips}</p>
+            </div>
+          );
+        })
+      )}
+    </div>
+  );
+};
+export default Show;
