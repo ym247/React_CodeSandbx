@@ -1,0 +1,37 @@
+import React, { useState, useEffect } from "react";
+import axios from 'axios'
+
+const Show = () => {
+const [data, setData]= useState([]);
+
+const myApiRequest =async()=>{
+
+  const response=await axios.get(`https://api.instantwebtools.net/v1/passenger?page=0&size=10`);
+  setData(response.data.data)
+}
+
+
+useEffect(()=>{
+  myApiRequest();
+},[]);
+console.log(data)
+
+  return (
+    <div>Api Integration
+
+      {data.map((elem)=>{
+        return (
+          <div key={elem.id} >
+            <p>{elem.name}</p>
+            <p>{elem.trips}</p>
+      
+          </div>
+        )
+      })}
+    </div>
+
+
+
+  )
+};
+export default Show;
